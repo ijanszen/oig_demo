@@ -1,4 +1,4 @@
-# oig_demo
+Vanuit OIG zijn er enkele vragen gesteld om over na te denken. Hierbij mijn idee naar wat het beste gedaan kan worden. 
 
 Hoe zou je de technische inrichting maken om een respondent de vragenlijst te tonen?
 	-Questions model, controller & vragenlijst opzettten
