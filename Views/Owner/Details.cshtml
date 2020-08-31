@@ -1,0 +1,39 @@
+﻿@model dashboard.Models.Owner
+
+@{
+    ViewBag.Title = "Details" ;
+}
+
+<h2>De onderzoeken van @Html.DisplayFor(model => model.Name)</h2>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>Naam</th>
+            <th>Status</th>
+            <th>Start datum</th>
+            <th>Eind datum</th>
+        </tr>
+        @foreach (var item in Model.Surveys)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,22 @@
+﻿@model dashboard.Models.Owner
+
+@{
+    ViewBag.Title = "Gebruiker verwijderen";
+}
+<h3>Gebruiker verwijderen</h3>
+
+<div>
+    Weet je zeker dat je <b>@Html.DisplayFor(model => model.Name)</b> wilt verwijderen?
+    <p class="error">@ViewBag.ErrorMessage</p>
+    <hr />
+    </br>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Verwijder" class="btn btn-default" /> |
+            @Html.ActionLink("Terug naar het gebruikersoverzicht", "Index")
+        </div>
+    }
+</div>

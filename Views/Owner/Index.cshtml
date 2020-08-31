@@ -1,0 +1,33 @@
+﻿@model IEnumerable<dashboard.Models.Owner>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Gebruikersoverzicht</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th/>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Aanpassen", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Vragenlijst", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Verwijder", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+</table>
+
+<p>
+    @Html.ActionLink("Nieuwe gebruiker aanmaken", "Create")
+</p>

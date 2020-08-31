@@ -1,0 +1,42 @@
+﻿@model dashboard.Models.Survey
+
+@{
+    ViewBag.Title = "Questions";
+    var status = Model.Status.ToString();
+    var message = "";
+}
+
+<h2>@Html.DisplayFor(model => model.Name) onderzoek</h2>
+
+@switch (status)
+{
+    case "Concept":
+        message = "Het onderzoek is nog in de concept fase. U kunt nog geen vragen beantwoorden.";
+        break;
+    case "Gepland":
+        message = "Het onderzoek gaat binnenkort pas van start. U kunt nog geen vragen beantwoorden.";
+        break;
+    case "Afgerond":
+        message = "Het onderzoek is afgerond. U kunt geen vragen meer beantwoorden. ";
+        break;
+    default:
+        message = "Het onderzoek van start! Vult alstublieft aandachtig de vragen in. ";
+        break;
+}
+<p>@message</p>
+<div>
+    <hr />
+    Vragenlijst:
+    <ul>
+        <li>Hoeveel vragen zal ik doen?</li>
+        <li>Moeten wel moeilijk zijn</li>
+        <li>place holder</li>
+        <li>Lorem ipsum</li>
+        <li>asdfgbhnm</li>
+        <li>Vraag zoveel</li>
+    </ul>
+</div>
+<p>
+    @Html.ActionLink("Pas de data of naam aan", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Terug naar het overzicht", "Index")
+</p>

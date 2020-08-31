@@ -1,0 +1,78 @@
+﻿<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@model PagedList.IPagedList<dashboard.Models.Survey>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Message = "Op deze pagina vind je een overzicht van alle onderzoeken die er zijn uitgevoerd. ";
+}
+
+<h2>Onderzoekoverzicht</h2>
+
+
+@using (Html.BeginForm("Index", "Survey", FormMethod.Get))
+{
+    <p>
+        Zoek op onderzoeks- of eigenaarnaam: <br /> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)        
+        <input type="submit" value="Search" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Eigenaar", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Onderzoek
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            @Html.ActionLink("Begindatum", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Einddatum
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.ActionLink("Aanpassen", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Vragenlijst", "Questions", new { id = item.ID }) |
+                @Html.ActionLink("Verwijder", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Nieuw onderzoek aanmaken", "Create")
+</p>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
